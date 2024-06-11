@@ -16,3 +16,9 @@ img {
   display: block;
   max-width: 100%;
 }
+
+button {
+  cursor: pointer;
+  margin-left: 10px;
+  margin-bottom: 20px;
+}

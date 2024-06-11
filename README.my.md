@@ -1,19 +1,19 @@
-1. створюємо новий репозиторій (з нашим проектом) на github (gitignore та readme
-   не додаємо);
-2. ?Завантажуємо на комп'ютер (можна через GitHub Desktop). Відкриваємо проект в
-   vs code;
-3. скачуємо parcel;
-4. переназиваємо папку parcel на ім'я нашего проекта (наприклад goit-js-hw-08);
-5. перепідв'язуємо наш репозиторій: git remote -v (вкаже на який репозиторій ми
-   зараз посилаєось (на parcel)); git remote set-url origin 'посилання на наш
-   репозиторій'; перевіряємо git remote -v;
-6. Закриваємо vs code, видаляємо папку src; скачуємо папку src з проекту і
-   вставляємо замість видаленної;
-7. Налаштовуємо Деплой: в папці package.json форматуємо поля "homepage":
-   "https://your_username.github.io/your_repo_name/", та "scripts": { "build":
-   "parcel build src/\*.html --public-url /your_repo_name/" };
-8. встановлюємо всі залежності пакету npm i (або npm install);
-9. npm start запускаємо;
+1.  створюємо новий репозиторій (з нашим проектом) на github (gitignore та
+    readme не додаємо);
+2.  ?Завантажуємо на комп'ютер (можна через GitHub Desktop). Відкриваємо проект
+    в vs code;
+3.  скачуємо parcel;
+4.  переназиваємо папку parcel на ім'я нашего проекта (наприклад goit-js-hw-08);
+5.  перепідв'язуємо наш репозиторій: git remote -v (вкаже на який репозиторій ми
+    зараз посилаєось (на parcel)); git remote set-url origin 'посилання на наш
+    репозиторій'; перевіряємо git remote -v;
+6.  Закриваємо vs code, видаляємо папку src; скачуємо папку src з проекту і
+    вставляємо замість видаленної;
+7.  Налаштовуємо Деплой: в папці package.json форматуємо поля "homepage":
+    "https://your_username.github.io/your_repo_name/", та "scripts": { "build":
+    "parcel build src/\*.html --public-url /your_repo_name/" };
+8.  встановлюємо всі залежності пакету npm i (або npm install);
+9.  npm start запускаємо;
 10. Виконуємо наші завдання, прописуємо код;
 11. підготовка репозиторію: Settings -> Actions -> Generals -> скролимо до низу
     виставляємо галочки на Read and write permision та Allow GitHub...;
@@ -23,3 +23,12 @@
     автоматично з'явиться ще одна гілка gh-pages.
 14. Settings -> Pages -> (обираємо з якої гілки будемо створювати нашу
     сторінку), з gh-pages (тому що тут лежать мініфіковані файли) -> Save;
+
+        //==================== Додаток Мультіаплікейшн
+        ========================================= //Створюмє додатки
+        мультіаплікейшн, на кожну вкладку своя html сторінка;
+         //створюємо:
+        chekout.html and favorite.html (робимо для них стандартну розмітку);
+
+    встановили npm install basiclightbox; підключили import \* as basicLightbox
+    from 'basiclightbox'
