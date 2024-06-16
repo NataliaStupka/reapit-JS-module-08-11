@@ -41,7 +41,7 @@ export default [
   },
   {
     id: 6,
-    img: 'https://static.dnipro-m.ua/cache/products/5596/catalog_origin_191105.jpg',
+    img: 'https://static.dnipro-m.ua/cache/products/5408/catalog_origin_322440.jpg',
     name: 'Тример',
     price: 3699,
     description:
@@ -57,7 +57,7 @@ export default [
   },
   {
     id: 8,
-    img: 'https://static.dnipro-m.ua/cache/products/5596/catalog_origin_191105.jpg',
+    img: 'https://static.dnipro-m.ua/cache/products/2741/catalog_origin_318327.jpg',
     name: 'Генератор',
     price: 10890,
     description:

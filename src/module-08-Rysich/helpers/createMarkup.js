@@ -6,7 +6,7 @@ function createMarkup(arr, list) {
       .map(
         ({ id, img, name }) =>
           `
-  <li data-id="${id}" class="js-card">
+  <li data-id="${id}" class="js-card list__card">
       <img src="${img}" alt="${name}" width='300' loading="lazy"/>
       <h2>${name}</h2>
       <p >
