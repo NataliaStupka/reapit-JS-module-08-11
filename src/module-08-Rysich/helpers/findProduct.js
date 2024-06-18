@@ -1,4 +1,5 @@
 import instruments from './instruments'; //[instruments]
+
 //знаходимо id, а потім по ньому обранний продукт із всього масива
 function findProduct(element) {
   //data-атрибут повертає рядок, тому приводимо до числа

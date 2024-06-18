@@ -8,8 +8,8 @@ import instruments from './helpers/instruments.js';
 
 import { common } from './common.js'; //ключі LocalStorage
 import { createMarkup } from './helpers/createMarkup.js'; //функция розмітка початкової сторінки інструментів
-import { findProduct } from './helpers/findProduct.js'; //обранний продукт
-import { selectedProduct } from './helpers/selectedProduct.js';
+import { findProduct } from './helpers/findProduct.js'; //обранний продукт (знаходимо в масиві продуктів)
+import { selectedProduct } from './helpers/selectedProduct.js'; //'more information';
 
 const search = document.querySelector('.js-search');
 const list = document.querySelector('.js-list');
@@ -31,7 +31,8 @@ createMarkup(instruments, list);
 function onClick(event) {
   event.preventDefault(); //відміна перезагрузки
 
-  //якщо натиснули на "more information": знаходимо продукт по id і виводиться модалка з інформацією про обранний продукт (через бібліотеці)
+  //якщо натиснули на "more information": знаходимо продукт по id
+  // і виводиться модалка з інформацією про обранний продукт(через бібліотеку)
   selectedProduct(event);
 
   //якщо натиснули на "add to favorite"

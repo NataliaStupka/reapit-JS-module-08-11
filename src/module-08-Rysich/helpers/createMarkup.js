@@ -10,17 +10,17 @@ function createMarkup(arr, list) {
       <img src="${img}" alt="${name}" width='300' loading="lazy"/>
       <h2>${name}</h2>
       <p >
-        <a class="js-info" href="#">More information</a>
+        <a class="js-info" href="#">Більше інформації</a>
       </p>
-      <div>
-         <button class="js-favorite">Add to favorite</button>
-        <button class="js-bascket">Add to basket</button>
+      <div class="list__button">
+         <button class="js-favorite">Додати до улюбленного</button>
+        <button class="js-bascket">Додати до корзни</button>
       </div>
     </li>`
       )
       .join('');
   } else {
-    markup = `<p>Товар не обранно!</p>`;
+    markup = `<p>Оберіть товар!</p>`;
   }
 
   list.innerHTML = markup;
