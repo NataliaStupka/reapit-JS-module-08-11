@@ -1,6 +1,7 @@
 import { common } from './common'; //ключі localStorage
 //import { createMarkup } from './helpers/createMarkup';
 import { selectedProduct } from './helpers/selectedProduct'; //знаходимо обранний продукт; модальне вікно
+import { removeProduct } from './helpers/removeProduct';
 
 const list = document.querySelector('.js-list');
 list.addEventListener('click', onClick);
@@ -24,7 +25,7 @@ function createMarkup(arr) {
       </p>
       <div class="list__button">
         
-        <button class="js-bascket">"ЗРОБИТИ" - Видалити з корзини</button>
+        <button class="js-bascket-delete">Видалити з корзини</button>
       </div>
     </li>`
       )
@@ -41,4 +42,11 @@ function onClick(event) {
   event.preventDefault(); //відміна перезагрузки
   //якщо натиснули на "more information": знаходимо продукт по id і виводимо модалку з інформацією про обранний продукт (через бібліотеці)
   selectedProduct(event);
+
+  //якщо Натиснули на кнопку "видалити з корзини"
+  if (event.target.classList.contains('js-bascket-delete')) {
+    removeProduct(event, basket, common.KEY_BASKET); //передаєм елемент, масив продуктів корзини, ключ сховища
+    //перемальовуємо сторінку після видалення
+    createMarkup(basket, list);
+  }
 }

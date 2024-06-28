@@ -4,13 +4,22 @@ import { selectedProduct } from './helpers/selectedProduct'; //знаходим�
 import { findProduct } from './helpers/findProduct';
 
 const list = document.querySelector('.js-list');
+const input = document.querySelector('.js-search');
 list.addEventListener('click', onClick);
+input.addEventListener('input', onSearch);
 
 const basketArr = JSON.parse(localStorage.getItem(common.KEY_BASKET)) ?? []; //для додати до корзини
 
 //розпаршуємо (обрані продукти)
 const favorite = JSON.parse(localStorage.getItem(common.KEY_FAVORITE)) ?? []; //якщо в localStorage щось є - виведе, якщо пусто то присвоїть []
 createMarkup(favorite, list);
+
+function onSearch(event) {
+  const findProduct = favorite.filter(({ name }) =>
+    name.toLowerCase().includes(event.target.value)
+  );
+  createMarkup(findProduct, list);
+}
 
 function createMarkup(arr) {
   let markup;
@@ -26,7 +35,7 @@ function createMarkup(arr) {
         <a class="js-info" href="#">Більше інформації</a>
       </p>
       <div class="list__button">
-        <button class="js-favorite-delete">"ЗРОБИТИ" - Видалити з улюбленного</button>
+        <button class="js-favorite-delete">Видалити з улюбленного</button>
         <button class="js-bascket">Додати до корзни</button>
       </div>
     </li>`
@@ -59,6 +68,10 @@ function onClick(event) {
 
   //якщо натиснули на "Видалити з улюбленного" ?????
   if (event.target.classList.contains('js-favorite-delete')) {
+    //------
+    //removeProduct(event, favorite, common.KEY_FAVORITE); //елемент, масив обраннго, ключ сховища
+    //-----
+
     const productId = Number(event.target.closest('.js-card').dataset.id); //знайшли id продукта, по батьку (closest)
     const product = favorite.find(({ id }) => id === productId); //продукт знайшли по id
     const indexProduct = favorite.indexOf(product); //індекс продукта в масиві favorite
@@ -77,3 +90,11 @@ function onClick(event) {
     createMarkup(favorite);
   }
 }
+
+//СПРОБУВАТИ ТАКИМ ЧИНОМ!!!!
+// // //Для видалення 1-2 елемента використовуємо метод .remove, наприклад видалимо той, в якому є id
+// // [...container.children].forEach(item => {
+// //   if (item.dataset.id !== 'none') {
+// //     item.remove();
+// //   }
+// // });

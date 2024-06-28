@@ -22,6 +22,10 @@ const basketArr = JSON.parse(localStorage.getItem(common.KEY_BASKET)) ?? [];
 
 function onSearch(event) {
   console.log('input:', event.target.value);
+  const findProduct = instruments.filter(({ name }) =>
+    name.toLowerCase().includes(event.target.value)
+  );
+  createMarkup(findProduct, list);
 }
 
 // розмітка початкової сторінки інструментів

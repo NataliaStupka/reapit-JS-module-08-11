@@ -23,10 +23,15 @@ button {
   margin-bottom: 20px;
 }
 
-ul {
+ul,
+li {
   list-style: none;
 }
 
-li {
-  list-style: none;
+/* ------------ */
+.active {
+  color: red;
+}
+.nav {
+  margin-bottom: 20px;
 }
