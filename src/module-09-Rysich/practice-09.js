@@ -92,7 +92,7 @@ setInterval(() => {
 const box = document.querySelector('.js-box');
 const titleTimer = document.querySelector('.js-timer');
 
-let counter = 6; //для таймеру
+let counter = 4; //для таймеру
 
 setTimeout(() => {
   box.style.display = 'block'; //показали перший раз рекламу
@@ -111,9 +111,104 @@ setTimeout(() => {
       box.style.display = 'none'; //закрили рекламу
     }
   }, 1000);
-}, 3000);
+}, 2000);
 
 function onClick() {
   box.style.display = 'none';
 }
-//----------------------------------
+//------------ 3 game "OneArmedBandit" (Promis)----------------------
+const start = document.querySelector('.js-start');
+const container = document.querySelector('.js-container');
+
+start.addEventListener('click', onStart);
+
+//map, Promise.allSettled(приймає масив, повертає масив об'єктів)
+function onStart() {
+  let counter = 0;
+
+  //console.dir(container); //можемо використати children
+  //так як це псевдомасив, то розпилимо його(перетворимо у повноційний масив із методами)
+  [...container.children].forEach(box => (box.textContent = ''));
+
+  const promises = [...container.children].map((_, i) => createPromise(i)); //в 'map' якщо перший або другий параметр не потрібен, щоб його не підсвічувало як не використанний, ставимо _
+
+  // Promise.allSettled приймає масив промісів, повертає масив об'єктів (в якому є статус і значення)
+  Promise.allSettled(promises).then(items => {
+    items.forEach((item, i) => {
+      setTimeout(() => {
+        if (item.status === 'fulfilled') {
+          counter += 1;
+        }
+        //по черзі в кожне 'віконце' підсавляємо в текстовий контент item.value, якщо не має то item.reason
+        container.children[i].textContent = item.value || item.reason;
+
+        //перевіряємо чи переміг чи програш
+        if (container.children.length - 1 === i) {
+          setTimeout(() => {
+            if (counter === container.children.length || !counter) {
+              alert('Winner');
+            } else {
+              alert('Lost money');
+            }
+          }, 500);
+        }
+      }, i * 1000);
+    });
+  });
+}
+
+function createPromise() {
+  return new Promise((res, rej) => {
+    const random = Math.random();
+
+    if (random > 0.5) {
+      res('🤑');
+    } else {
+      rej('😈');
+    }
+  });
+}
+//==== 2 спосіб:
+
+// //---forEach, додаткова обробка then/catch/finally, if/else---
+// function onStart() {
+//   const result = [];
+//   //console.dir(container); //можемо використати children
+//   //так як це псевдомасив, то розпилимо його(перетворимо у повноційний масив із методами)
+//   [...container.children].forEach(box => (box.textContent = ''));
+//   [...container.children].forEach((box, i) => {
+//     createPromise(i)
+//       .then(smile => {
+//         box.textContent = smile;
+//         result.push('1');
+//       })
+//       .catch(smile => {
+//         box.textContent = smile;
+//       })
+//       .finally(() => {
+//         setTimeout(() => {
+//           if (i === container.children.length - 1) {
+//             if (!result.length || result.length === 3) {
+//               alert('Winner');
+//             } else {
+//               alert('Lost money');
+//             }
+//           }
+//         }, 500);
+//       });
+//   });
+// }
+//
+// function createPromise(delay) {
+//   return new Promise((res, rej) => {
+//     setTimeout(() => {
+//       const random = Math.random();
+
+//       if (random > 0.5) {
+//         res('🤑');
+//       } else {
+//         rej('😈');
+//       }
+//     }, 1000 * delay);
+//   });
+// }
