@@ -30,3 +30,6 @@
 
     встановили npm install basiclightbox; підключили import \* as basicLightbox
     from 'basiclightbox'
+    //---------------------------------------------------------- //9 module: cdn
+    bootstrap для готової модалки + npm i bootstrap.native (для роботи native
+    js)

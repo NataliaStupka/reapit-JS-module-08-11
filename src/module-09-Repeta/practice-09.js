@@ -1,6 +1,186 @@
 console.log('Module-09-Repeta');
+// 1. Сповіщення ==============================-------------------------------------
+const NOTICATION_DELAY = 5000;
+let timeoutid = null; //для зняття setTimeout
 
-// ------- 2. Іподром --------------------------
+const notification = document.querySelector('.js-alert-sms');
+notification.addEventListener('click', onNotificationClick);
+
+showNotification();
+
+function onNotificationClick() {
+  hideNotification();
+  //при кліку, очищаємо setTimeout
+  clearTimeout(timeoutid);
+}
+
+function showNotification() {
+  notification.classList.add('is-visible-sms');
+
+  //ховаємо сповіщеня, через деякий час; з назвою щоб по ній відмінити setTimeout
+  timeoutid = setTimeout(() => {
+    console.log('Ховаємо алерт, щоб не висів');
+    hideNotification();
+  }, NOTICATION_DELAY);
+}
+
+function hideNotification() {
+  notification.classList.remove('is-visible-sms');
+}
+
+// 2. Підписка-набридалка-модалка ===============---bootstrap(html, css)--bootstrap.native(js)------------------------------------------
+import { Modal } from 'bootstrap.native';
+
+const refsModal = {
+  modal: document.querySelector('#myModal'),
+  subscribeBtn: document.querySelector('button[data-subscibe]'),
+};
+
+const PROMT_DELAY = 2000; // проміжок часу між повторюваннями
+const MAX_PROMT_ATTEMPTS = 3; //кількість повторюваннь
+let promptCounter = 0;
+let hasSubscribed = false; //чи підписанний
+const modal = new Modal('#myModal'); //по бібліотеці
+
+openModal();
+
+//s hown.bs.modal - модальні події з бібліотеки; modal.hide()
+refsModal.modal.addEventListener('hide.bs.modal', () => {
+  console.log('Закрилась набридалка');
+  openModal(); //відкрилась набридалка
+});
+//кнопка Підписатись
+refsModal.subscribeBtn.addEventListener('click', () => {
+  hasSubscribed = true;
+  modal.hide();
+});
+
+function openModal() {
+  if (promptCounter === MAX_PROMT_ATTEMPTS || hasSubscribed) {
+    console.log(
+      'максимальна кількість набридалок вже було відкрито або підписався'
+    );
+    return;
+  }
+
+  setTimeout(() => {
+    console.log('Відкриваємо набридалку');
+    modal.show();
+    promptCounter += 1;
+  }, PROMT_DELAY);
+}
+// ============---- 3. ТАЙМЕР ==========================================-------------------------------
+const refsTimer = {
+  startBtn: document.querySelector('button[data-action-start]'),
+  stopBtn: document.querySelector('button[data-action-stop]'),
+  clockface: document.querySelector('.js-clockface'),
+};
+
+//class займається тільки підрахунками часу
+class Timer {
+  //для утворення екземпляра
+  constructor({ onTick }) {
+    this.intervalId = null; // для зупинки інтервалу
+    this.isActive = false; // чи запущенний таймер
+    this.onTick = onTick; // малює інтерфейс
+    this.init(); //при першому завантаженні промалювуємо інтерфейс
+  }
+
+  //при першому завантаженні промалювуємо інтерфейс
+  init() {
+    const time = getTimeComponents(0); //часв звичному форматі
+    this.onTick(time); //малюємо інтерфейс
+  }
+  //метод початок таймера
+  start() {
+    //якщо таймер вже запущено - виходимо
+    if (this.isActive) {
+      return;
+    }
+    const startTime = Date.now();
+    this.isActive = true;
+
+    this.intervalId = setInterval(() => {
+      const currentTime = Date.now(); // Поточний час
+      const deltaTime = currentTime - startTime; //різниця часу
+
+      const time = getTimeComponents(deltaTime); //в звичному форматі
+
+      this.onTick(time); //малюємо інтерфейс
+    }, 1000);
+  }
+  //зупиняємо таймер
+  stop() {
+    clearInterval(this.intervalId);
+    this.isActive = false;
+    //при зупинці обнуляємо лічильнтк
+    const time = getTimeComponents(0); //часв звичному форматі
+    this.onTick(time); //малюємо інтерфейс
+  }
+}
+//в екземпляр передамо ссилку на функцію на промальовку інтерфейсу
+//передамо у об'єкт налаштувань
+const timer = new Timer({
+  onTick: updateClockface,
+});
+
+//--------2 спосіб, не class Timer-(об'єкт timer)--------------------------
+// const timer = {
+//   intervalId: null, // для зупинки інтервалу
+//   isActive: false,
+//   //метод початок таймера
+//   start() {
+//     //якщо таймер вже запущено - виходимо
+//     if (this.isActive) {
+//       return;
+//     }
+//     const startTime = Date.now();
+//     this.isActive = true;
+
+//     this.intervalId = setInterval(() => {
+//       const currentTime = Date.now(); // Поточний час
+//       const deltaTime = currentTime - startTime; //різниця часу
+
+//       const time = getTimeComponents(deltaTime); //в звичному форматі
+
+//       updateClockface(time); //малюємо інтерфейс
+//       console.log(`${time.hours}:${time.mins}:${time.secs}`); //в звичному форматі
+//     }, 1000);
+//   },
+//   //зупиняємо таймер
+//   stop() {
+//     clearInterval(this.intervalId);
+//     this.isActive = false;
+//   },
+// };
+//--*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*---**-*-*-*-*-*-*------------------
+
+//так як тут срілочна функція, при якій this буде вказувати на startBtn/stopBtn
+//прив'зуємо контекст this, щоб він зсилався на потрібний об'єкт (timer)
+refsTimer.startBtn.addEventListener('click', timer.start.bind(timer));
+refsTimer.stopBtn.addEventListener('click', timer.stop.bind(timer));
+
+//малює інтерфейс
+function updateClockface({ hours, mins, secs }) {
+  refsTimer.clockface.textContent = `${hours}:${mins}:${secs}`;
+}
+
+//------------------------------------
+function pad(value) {
+  return String(value).padStart(2, '0');
+}
+//час у звичному форматі
+function getTimeComponents(time) {
+  const hours = pad(
+    Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+  );
+  const mins = pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
+  const secs = pad(Math.floor((time % (1000 * 60)) / 1000));
+
+  return { hours, mins, secs };
+}
+
+// =============--- 4. ІПОДРОМ ========================================---------------------------
 const horses = [
   'Secretarial',
   'Eclipce',
