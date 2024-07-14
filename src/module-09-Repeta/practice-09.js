@@ -144,7 +144,7 @@ const timer = new Timer({
 //       const time = getTimeComponents(deltaTime); //в звичному форматі
 
 //       updateClockface(time); //малюємо інтерфейс
-//       console.log(`${time.hours}:${time.mins}:${time.secs}`); //в звичному форматі
+//       console.log(`${time.hours}:${time.mins}:${time.secs}`); // час в звичному форматі
 //     }, 1000);
 //   },
 //   //зупиняємо таймер
@@ -153,6 +153,15 @@ const timer = new Timer({
 //     this.isActive = false;
 //   },
 // };
+//
+//refsTimer.startBtn.addEventListener('click', timer.start());
+// refsTimer.stopBtn.addEventListener('click', timer.stop());
+
+// //малює інтерфейс
+// function updateClockface({ hours, mins, secs }) {
+//   refsTimer.clockface.textContent = `${hours}:${mins}:${secs}`;
+// }
+
 //--*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*---**-*-*-*-*-*-*------------------
 
 //так як тут срілочна функція, при якій this буде вказувати на startBtn/stopBtn
