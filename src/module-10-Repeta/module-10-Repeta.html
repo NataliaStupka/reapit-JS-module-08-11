@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10-Module</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <a href="../index.html">Go back</a>
+    <h1>"Завантажити більше"</h1>
+
+    <form class="feedback-form js-search-form">
+        <div class="form-group">
+            <label for="searchQueery" class="label">Що шукаємо</label>
+            <input 
+                type="text"
+                class="input"
+                name="query"
+                id="searchQueery"
+                placeholder="Що шукаємо"
+                autocomplete="off"
+            >
+        </div>
+        <button type="submit" class="button btn btn-primary mb-2">Шукати</button>
+    </form>
+
+    <ul class="articles js-articles-container"></ul>
+
+    <button 
+        type="button" 
+        class="btn btn-primary button" 
+        data-action="load-more">
+    
+        <span 
+            class="spinner-border spinner-border-sm spinner is-hidden"
+            role="status"
+            aria-hidden="true"
+            ></span>
+        <span class="label">Показати ще</span>
+    </button>
+
+
+
+    <script src="./practice-10.js" type="module"></script>
+</body>
+</html>

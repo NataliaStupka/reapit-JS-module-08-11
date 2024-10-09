@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10-Module</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <a href="../index.html">Go back</a>
+<h1>Rest запит, api key</h1>
+<h2>1. Погода.</h2>
+<form action="submit" class="js-search">
+    <input type="text" name="query">
+    <select name="days" >
+        <option value="3">3</option>
+        <option value="5">5</option>
+        <option value="7">7</option>
+        <option value="10">10</option>
+        <option value="14">14</option>
+    </select>
+    <button>Шукати</button>
+</form>
+
+<ul class="list js-list"></ul>
+
+<h2>2. Пагінація.</h2>
+<p>Запит, авторизація через Біреер(Bearer) токен</p>
+
+<ul class="list js-list_trending"></ul>
+
+<!-- ставимо пустий div щоб до нього прив'язати інфініті скрол-->
+<div class="js-guard"></div>
+<button class="js-load" hidden>Load more</button>
+
+
+<script src="./practice-10.js" type="module"></script>
+</body>
+</html>
